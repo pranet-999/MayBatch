@@ -1,0 +1,13 @@
+Clone the project :
+
+git clone <repository_url>
+
+
+Modify → Add → Commit → Push
+
+git status
+git add .
+git commit -m "Added employee table"
+git push origin main
+
+
