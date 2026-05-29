@@ -77,7 +77,7 @@ FROM employee_data--1
 WHERE count(emp_id) --2
 Group BY department--3
 
-Select
+Select emp_id,salary
 From employee_data
 Where 
 
@@ -89,24 +89,67 @@ FINACE-5
 Sales-10
 HR-22
 
-
-Execution
-
-
-
-
+--I want to classify the employess in different catogeries based on their salary
+salary>80k--->high range
+80k<salary>50k--->medium range
+salary<50k--->low range
 
 
+if sal>80k then=high range
+else
+
+Case WHEN===>if else logic in sql
+
+Select emp_id,salary,
+		CASE
+			WHEN salary>80000 THEN 'high'
+			WHEN Salary  between 50000 AND 80000 THEN 'Medium'
+			WHEN salary IS NULL THEN 'Not specified'
+			ELSE 'LOW'
+		END as salary_catagery
+FROM employee_data
 
 
 
+Insert emp_id,salary,
+		CASE
+			WHEN salary>80000 THEN 'high'
+			WHEN Salary  between 50000 AND 80000 THEN 'Medium'
+			WHEN salary IS NULL THEN 'Not specified'
+			ELSE 'LOW'
+		END as salary_catagery
+FROM employee_data
+
+Select * from employee_data
+
+--Date functions:
+
+--I want to create a column on which year the employee has joined 
+
+Select emp_id,EXTRACT(Year FROM last_login) as Date_of_joining
+From employee_data
+
+
+Select current_date
+
+--STRING Methods:
+
+Select first_name,lower(first_name) as upper_Case
+FROM employee_data
+
+Select first_name,length(first_name) as char_count
+FROM employee_data
 
 
 
+--email--based on first name and email should be @cc.com
+Select
+first_name,CONCAT(first_name,'@cc.com') as new_email
+From employee_data
 
 
 
-
+--substring
 
 
 
