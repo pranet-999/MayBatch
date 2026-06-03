@@ -30,10 +30,10 @@ SELECT emp,
        department,
        salary,
        AVG(salary) OVER(PARTITION BY dept) AS dept_avg
-FROM employee_data;
+FROM employee_data_data;
 -------------------------------------------------------------------------------
 Select department,AVG(salary)
-FROM employee_data
+FROM employee_data_data
 Group by department
 --------------------------------------------------------------
 
@@ -42,18 +42,18 @@ SELECT emp,
        department,
        salary,
        SUM(salary) OVER(PARTITION BY dept) AS total_salary
-FROM employee;
+FROM employee_data;
 
 SELECT emp,
        department,
        COUNT(*) OVER(PARTITION BY dept) AS emp_count
-FROM employee;
+FROM employee_data;
 
 
 SELECT emp,
        salary,
        ROW_NUMBER() OVER(ORDER BY salary DESC) AS rn
-FROM employee;
+FROM employee_data;
 
 
 
