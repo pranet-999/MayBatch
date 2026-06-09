@@ -54,6 +54,86 @@ Group By city---2
 Order by total_revenue_city DESC----4
 OFFSET 1
 Limit 1
+===================================================================================================
+With t1 As
+(Select city,sum(amount),
+	Dense_Rank() over(order by sum(amount) DESC) as dnse_rank
+FROM food_orders
+Group by city)
+Select * from t1
+Where dnse_rank=1
+
+
+Select * from food_orders
+
+--Find highest revenue restaurant
+--Restaurant With Fastest Average Delivery
+
+Select restaurant,avg(delivery_time)
+		--dense_rank() over(partition by restaurant order by avg(delivery_time)) as d_rank
+from food_orders
+Group by restaurant
+=====================================================================
+With t as 
+(Select restaurant,avg(delivery_time),
+		dense_rank() over(order by avg(delivery_time)) as d_rank
+from food_orders
+Group by restaurant)
+Select * from t
+where d_rank=1
+
+Select min(delivery_time)
+From food_orders
+
+--Find Customers Spending Above Average Order Amount
+
+--1.cal avg
+--2.compare each row with avg
+
+Select * 
+from food_orders
+Where amount>
+(Select avg(amount)
+From food_orders)
+===============================================================================
+With avg_order as
+(Select avg(amount) as avg_amount
+From food_orders)
+Select * 
+from food_orders
+Where amount>(Select avg_amount from avg_order)
+=====================================================================
+
+Select * from food_orders
+
+=========================================
+
+--Top 2 Highest Orders Per Restaurant
+With t as
+(Select * ,dense_rank() over(partition by restaurant order by amount DESc) as d_rank
+From food_orders)
+Select * from t
+where d_rank <=2
+==========================================================================
+--Practice Problems
+--1.Categorize delivery:
+	-- <20 → Super Fast
+	-- 20-30 → Fast
+	-- >30 → Slow
+--2.Categorize orders:
+		-- Amount > 700 → Premium
+		-- 400-700 → Standard
+		-- Else Budget
+--3.Most recent order of every customer
+--4. Rank restaurants by revenue.
+--5.Rank cities by revenue.
+--6.Rank customers by total spending.
+--7.Rank restaurants by average rating.
+-- 8.Compare each customer's order amount with previous order.
+-- 9.Find increase/decrease in spending between orders.
+
+
+		
 
 
 
