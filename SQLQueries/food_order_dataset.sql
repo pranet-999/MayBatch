@@ -120,16 +120,53 @@ where d_rank <=2
 	-- <20 → Super Fast
 	-- 20-30 → Fast
 	-- >30 → Slow
+============================================================================================
+Select order_id,delivery_time,
+	CASE
+		WHEN delivery_time<20 THEN 'Super fast'
+		WHEN delivery_time BETWEEN 20 AND 30 THEN 'Fast'
+		ELSE 'slow'
+	END as delivary_category
+From food_orders
+========================================================================================
+Select * from food_orders
+
 --2.Categorize orders:
 		-- Amount > 700 → Premium
 		-- 400-700 → Standard
 		-- Else Budget
+
+Select customer,AVG(amount),
+		CASE
+			WHEN AVG(amount)>700 THEN 'Premium'
+			WHEN AVG(amount) BETWEEN 400 AND 700  THEN 'Standard'
+			ELSE 'Budget'	
+		END as order_category
+from food_orders--1
+GROUP BY customer--2
+
+======================================================================================================
 --3.Most recent order of every customer
+Select * from food_orders
+Where order_date IN
+(Select max(order_date)
+From food_orders
+Group by customer) 
+=====================================================================================================
+
+--4.last 2 recent order of every customer
+
+
+
 --4. Rank restaurants by revenue.
+
 --5.Rank cities by revenue.
 --6.Rank customers by total spending.
 --7.Rank restaurants by average rating.
 -- 8.Compare each customer's order amount with previous order.
+
+
+
 -- 9.Find increase/decrease in spending between orders.
 
 
